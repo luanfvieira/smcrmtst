@@ -1,8 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import { PageHeaderDashboard } from "./PageHeader";
 import { ReportPerStatus } from "./ReportPerStatus";
-// import { ReportPerBranch } from "./ReportPerBranch";
-// import { ReportPerAgent } from "./ReportPerAgent";
+import { ReportPerBranch } from "./ReportPerBranch";
+import { ReportPerAgent } from "./ReportPerAgent";
 
 import PageTitleWrapper from "src/components/Scrollbar/PageTitleWrapper";
 
@@ -19,11 +19,6 @@ import { useQuery } from "react-query";
 function DashboardProducts() {
   const [month, setMonth] = useState(format(new Date(), "M", { locale: ptBR }));
 
-  // console.log(format(new Date(), "M", { locale: ptBR }));
-
-  // const [data, setData] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
-
   const { data, isLoading } = useQuery(
     ["dashboard", month],
     async () => {
@@ -35,23 +30,6 @@ function DashboardProducts() {
     },
     { refetchOnWindowFocus: false }
   );
-
-  // useEffect(() => {
-  //   async function getData() {
-  //     try {
-  //       setIsLoading(true);
-  //       const { data } = await api.get("/crm/leads/quantities", {
-  //         params: { month },
-  //       });
-
-  //       setData(data?.quantities);
-  //       setIsLoading(false);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   getData();
-  // }, [month]);
 
   if (isLoading) {
     return <SuspenseLoader />;
@@ -95,7 +73,7 @@ function DashboardProducts() {
             </Box>
           )}
         </Grid>
-        {/* <Grid item md={6} xs={12}>
+        <Grid item md={6} xs={12}>
           {!empty(data?.countPerBranch) ? (
             <ReportPerBranch data={data?.countPerBranch} />
           ) : (
@@ -130,7 +108,7 @@ function DashboardProducts() {
               </Typography>
             </Box>
           )}
-        </Grid> */}
+        </Grid>
       </Grid>
       {/* <Footer /> */}
     </>
